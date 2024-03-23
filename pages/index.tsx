@@ -39,15 +39,16 @@ export default function Home() {
   
   return (
     <div className="w-screen h-screen flex">   
-        <div className="w-[20%]">
+        <div className="w-[30%] md:w-[20%]">
           <Dashboard user={currentUser} active="Dashboard"/>
         </div>
-        <div className="w-[80%] h-full bg-[#D9D9D9] p-32">
-          <div className="grid grid-cols-3  gap-8">
+        <div className="w-[70%] md:w-[80%] h-full bg-[#D9D9D9] py-8 px-4 md:py-32 md:px-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {subjects?.map((subject:any)=>(
                 <Link
                 href={`/subject/${subject?.id}`}
-                key={subject?.id} className={clsx(style.wrapper,"bg-white rounded-lg w-[20vw] h-auto p-4",
+                key={subject?.id} className={clsx(style.wrapper,
+                "bg-white rounded-lg w-full  md:w-[20vw] h-auto p-4",
                 "cursor-pointer hover:bg-gray-100")}>
                   <div className="flex justify-between">
                     <h2 className={clsx(style.poppins,"font-[600] max-w-[90%] line-clamp-1")}>{subject?.title}</h2>

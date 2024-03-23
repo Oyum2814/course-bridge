@@ -133,11 +133,12 @@ const Widget:React.FC<WidgetProps> = ({subject,user}) => {
         <div className="w-full h-auto p-4 flex flex-col justify-center gap-4">
             <h2 className="font-[600] text-xl text-center">Please Verify the uploaded File</h2>
             <a
+            target="_blank"
             href={previewLink}
-            className="px-4 w-[20vw] h-[20vw] flex justify-center items-center mx-auto py-8 rounded-lg bg-gray-500 text-white text-center">
+            className="px-4 my-8 md:my-0 w-[20vw] h-[20vw] flex justify-center items-center mx-auto py-8 rounded-lg bg-gray-500 text-white text-center">
                 <FaFileCode size={130} color="black"/>
             </a>
-            <div className="flex gap-6 mx-auto">
+            <div className="flex flex-col md:flex-row  gap-6 mx-auto">
                 <button
                 onClick={handleVerification}
                 className="bg-blue-600 px-8 py-3 text-white font-[600] rounded-lg ">Verify

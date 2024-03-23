@@ -49,15 +49,16 @@ const Auth = ()=>{
     return(
         <div className={clsx(
             style.wrapper,
-            "w-screen h-screen flex")}>
+            "w-screen h-screen flex bg-gradient-to-r from-cyan-500 to-blue-500 md:bg-none")}>
             <div className="hidden md:block w-[50%] h-full relative">
                 <Image 
                 priority
-                className="h-screen w-auto"
+                className="h-screen w-auto object-cover"
                 src={"/images/asset1.png"} alt=""  fill/>
             </div>
+            
             <div className="flex flex-col gap-4 justify-center items-center w-full md:w-[50%] h-full">
-                <h2 className={clsx(style.montserrat,"font-[600] text-3xl")}>Course Bridge</h2>
+                <h2 className={clsx(style.montserrat,"font-[600] text-3xl text-white md:text-black")}>Course Bridge</h2>
                 <div>
                     {variant==='register'&&(
                         <Input 
@@ -80,110 +81,111 @@ const Auth = ()=>{
                         type="password"
                         value={password}
                     />
-                    
-                    <div className="flex justify-center gap-x-4 my-2 py-2">
-                        <div  
-                        > 
-                            <input 
-                                type="radio"
-                                id="Faculty"
-                                value="Faculty"
-                                checked={ 
-                                    selectedRole === 
-                                    "Faculty"
-                                } 
-                                onChange={() => 
-                                    handleRadioChange( 
+                    {variant=='register' && (
+                        <div className="flex justify-center gap-x-4 my-2 py-2">
+                            <div  
+                            > 
+                                <input 
+                                    type="radio"
+                                    id="Faculty"
+                                    value="Faculty"
+                                    checked={ 
+                                        selectedRole === 
                                         "Faculty"
-                                    ) 
-                                } 
-                            /> 
-                            <label 
-                            className="ml-2"
-                                htmlFor="Faculty"
+                                    } 
+                                    onChange={() => 
+                                        handleRadioChange( 
+                                            "Faculty"
+                                        ) 
+                                    } 
+                                /> 
+                                <label 
+                                className="ml-2"
+                                    htmlFor="Faculty"
+                                > 
+                                    Faculty 
+                                </label> 
+                            </div> 
+        
+                            <div 
                             > 
-                                Faculty 
-                            </label> 
-                        </div> 
-    
-                        <div 
-                        > 
-                            <input 
-                                type="radio"
-                                id="Coordinator"
-                                value="Coordinator"
-                                checked={ 
-                                    selectedRole === 
-                                    "Coordinator"
-                                } 
-                                onChange={() => 
-                                    handleRadioChange( 
+                                <input 
+                                    type="radio"
+                                    id="Coordinator"
+                                    value="Coordinator"
+                                    checked={ 
+                                        selectedRole === 
                                         "Coordinator"
-                                    ) 
-                                } 
-                            /> 
-                            <label 
-                            className="ml-2"
-                                htmlFor="Coordinator"
-                            > 
-                                Coordinator
-                            </label> 
-                        </div>
+                                    } 
+                                    onChange={() => 
+                                        handleRadioChange( 
+                                            "Coordinator"
+                                        ) 
+                                    } 
+                                /> 
+                                <label 
+                                className="ml-2"
+                                    htmlFor="Coordinator"
+                                > 
+                                    Coordinator
+                                </label> 
+                            </div>
 
-                        <div 
-                        > 
-                            <input 
-                                type="radio"
-                                id="Auditor"
-                                value="Auditor"
-                                checked={ 
-                                    selectedRole === 
-                                    "Auditor"
-                                } 
-                                onChange={() => 
-                                    handleRadioChange( 
+                            <div 
+                            > 
+                                <input 
+                                    type="radio"
+                                    id="Auditor"
+                                    value="Auditor"
+                                    checked={ 
+                                        selectedRole === 
                                         "Auditor"
-                                    ) 
-                                } 
-                            /> 
-                            <label 
-                            className="ml-2"
-                                htmlFor="Auditor"
-                            > 
-                                Auditor
-                            </label> 
-                        </div> 
+                                    } 
+                                    onChange={() => 
+                                        handleRadioChange( 
+                                            "Auditor"
+                                        ) 
+                                    } 
+                                /> 
+                                <label 
+                                className="ml-2"
+                                    htmlFor="Auditor"
+                                > 
+                                    Auditor
+                                </label> 
+                            </div> 
 
-                        <div 
-                        > 
-                            <input 
-                                type="radio"
-                                id="HOD"
-                                value="HOD"
-                                checked={ 
-                                    selectedRole === 
-                                    "HOD"
-                                } 
-                                onChange={() => 
-                                    handleRadioChange( 
-                                        "HOD"
-                                    ) 
-                                } 
-                            /> 
-                            <label 
-                            className="ml-2"
-                                htmlFor="OD"
+                            <div 
                             > 
-                                HOD
-                            </label> 
-                        </div> 
-                    </div>
+                                <input 
+                                    type="radio"
+                                    id="HOD"
+                                    value="HOD"
+                                    checked={ 
+                                        selectedRole === 
+                                        "HOD"
+                                    } 
+                                    onChange={() => 
+                                        handleRadioChange( 
+                                            "HOD"
+                                        ) 
+                                    } 
+                                /> 
+                                <label 
+                                className="ml-2"
+                                    htmlFor="OD"
+                                > 
+                                    HOD
+                                </label> 
+                            </div> 
+                        </div>
+                    )}
                 </div>
                 <button onClick={variant==='login'?login:register} className="bg-blue-600 py-3 text-white font-medium rounded-md  mt-5
                         hover:bg-blue-800 transition w-[20%]">
                             {variant==='login'?'Login':'Sign Up'}
                 </button>
-                <p className="text-center">
+                <p className="text-center text-white md:text-black">
                             {variant==='login'?'New to Course Bridge?':'Already have an account?'}
                             <span onClick={toggleVariant} className="underline ml-1 hover:text-blue-600 cursor-pointer">
                                 {variant==='login'?'Create Account':'Login'}
