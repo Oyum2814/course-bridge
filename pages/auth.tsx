@@ -12,8 +12,14 @@ const Auth = ()=>{
     const [email, setEmail] = useState('');
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [subjects,setSubjects] = useState([]);
-    
+
+    const [selectedRole, setselectedRole] = useState(""); 
+    const handleRadioChange = ( 
+        value :any
+    ) => { 
+        setselectedRole(value); 
+    }; 
+
     const [variant, setVariant] = useState('login');
 
     const toggleVariant = useCallback(()=>{
@@ -31,12 +37,12 @@ const Auth = ()=>{
 
     const register = useCallback(async ()=>{
         try{
-            const res= await axios.post('/api/register',{email, username, password});
+            const res= await axios.post('/api/register',{email, username, password,selectedRole});
             login();
         } catch(error) {
             console.log("Error Appeared :: "+error);
         }
-    },[email, username, password,login]);
+    },[email, username, password,login,selectedRole]);
 
     
     
@@ -75,7 +81,103 @@ const Auth = ()=>{
                         value={password}
                     />
                     
-                
+                    <div className="flex justify-center gap-x-4 my-2 py-2">
+                        <div  
+                        > 
+                            <input 
+                                type="radio"
+                                id="Faculty"
+                                value="Faculty"
+                                checked={ 
+                                    selectedRole === 
+                                    "Faculty"
+                                } 
+                                onChange={() => 
+                                    handleRadioChange( 
+                                        "Faculty"
+                                    ) 
+                                } 
+                            /> 
+                            <label 
+                            className="ml-2"
+                                htmlFor="Faculty"
+                            > 
+                                Faculty 
+                            </label> 
+                        </div> 
+    
+                        <div 
+                        > 
+                            <input 
+                                type="radio"
+                                id="Coordinator"
+                                value="Coordinator"
+                                checked={ 
+                                    selectedRole === 
+                                    "Coordinator"
+                                } 
+                                onChange={() => 
+                                    handleRadioChange( 
+                                        "Coordinator"
+                                    ) 
+                                } 
+                            /> 
+                            <label 
+                            className="ml-2"
+                                htmlFor="Coordinator"
+                            > 
+                                Coordinator
+                            </label> 
+                        </div>
+
+                        <div 
+                        > 
+                            <input 
+                                type="radio"
+                                id="Auditor"
+                                value="Auditor"
+                                checked={ 
+                                    selectedRole === 
+                                    "Auditor"
+                                } 
+                                onChange={() => 
+                                    handleRadioChange( 
+                                        "Auditor"
+                                    ) 
+                                } 
+                            /> 
+                            <label 
+                            className="ml-2"
+                                htmlFor="Auditor"
+                            > 
+                                Auditor
+                            </label> 
+                        </div> 
+
+                        <div 
+                        > 
+                            <input 
+                                type="radio"
+                                id="HOD"
+                                value="HOD"
+                                checked={ 
+                                    selectedRole === 
+                                    "HOD"
+                                } 
+                                onChange={() => 
+                                    handleRadioChange( 
+                                        "HOD"
+                                    ) 
+                                } 
+                            /> 
+                            <label 
+                            className="ml-2"
+                                htmlFor="OD"
+                            > 
+                                HOD
+                            </label> 
+                        </div> 
+                    </div>
                 </div>
                 <button onClick={variant==='login'?login:register} className="bg-blue-600 py-3 text-white font-medium rounded-md  mt-5
                         hover:bg-blue-800 transition w-[20%]">
@@ -88,7 +190,7 @@ const Auth = ()=>{
                             </span>
                 </p>
                  <div className="flex flex-col items-center gap-4 mt-8 justify-center">
-                            <div 
+                            {/* <div 
                             onClick={(e)=>{
                                 e.preventDefault();
                                 signIn('google',{callbackUrl:'/'});
@@ -98,7 +200,7 @@ const Auth = ()=>{
                                  justify-center cursor-pointer hover:opacity-80 transition">
                                 <FcGoogle size={30}/>
                                 <div className="ml-3 text-[#333333] font-extralight">Continue with Google</div>
-                            </div>
+                            </div> */}
                         </div>
             </div>
         </div>

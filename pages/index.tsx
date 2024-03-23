@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className="w-screen h-screen flex">   
         <div className="w-[20%]">
-          <Dashboard user={currentUser}/>
+          <Dashboard user={currentUser} active="Dashboard"/>
         </div>
         <div className="w-[80%] h-full bg-[#D9D9D9] p-32">
           <div className="grid grid-cols-3  gap-8">

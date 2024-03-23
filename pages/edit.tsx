@@ -5,6 +5,7 @@ import axios from "axios";
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export async function getServerSideProps(context: NextPageContext){
     const session = await getSession(context);
@@ -44,17 +45,18 @@ const edit = () => {
         })
         .then(response => {
             mutate({ ...currentUser, role: selectedRole }, false);
-            console.log(response.data);
+            toast.success("Role Changed");
         })
         .catch(error => {
             console.error('Error:', error.response.data);
+            toast.error("An Error Occured");
         });
       }
 
     return ( 
         <div className="w-screen h-screen flex">   
             <div className="w-[20%]">
-            <Dashboard user={currentUser}/>
+            <Dashboard user={currentUser} active="Settings"/>
             </div>
             <div className="w-[80%] h-full bg-[#D9D9D9] p-32 flex flex-col items-center">
                         <div className="flex justify-center gap-x-4 my-2 py-2">
