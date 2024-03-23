@@ -4,15 +4,15 @@ import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { compare } from 'bcrypt';
-import prismadb from '../../../lib/prismadb';
+import prismadb from '@/lib/prismadb';
 
 export const authOptions: AuthOptions = {
   providers: [
-    // GithubProvider({
-    //   clientId: process.env.GITHUB_ID || '',
-    //   clientSecret: process.env.GITHUB_SECRET || '',
-    //   allowDangerousEmailAccountLinking: true,
-    // }),
+    GithubProvider({
+      clientId: process.env.GITHUB_ID || '',
+      clientSecret: process.env.GITHUB_SECRET || '',
+      allowDangerousEmailAccountLinking: true,
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
@@ -28,7 +28,7 @@ export const authOptions: AuthOptions = {
         },
         password: {
           label: 'Password',
-          type: 'password'
+          type: 'passord'
         }
       },
       async authorize(credentials) {

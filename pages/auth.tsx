@@ -12,7 +12,8 @@ const Auth = ()=>{
     const [email, setEmail] = useState('');
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-
+    const [subjects,setSubjects] = useState([]);
+    
     const [variant, setVariant] = useState('login');
 
     const toggleVariant = useCallback(()=>{
@@ -38,7 +39,7 @@ const Auth = ()=>{
     },[email, username, password,login]);
 
     
-
+    
     return(
         <div className={clsx(
             style.wrapper,
@@ -54,7 +55,7 @@ const Auth = ()=>{
                 <div>
                     {variant==='register'&&(
                         <Input 
-                        label="Username"
+                        label="Name"
                         onChange={(e:any)=>setUserName(e.target.value)}
                         id="Username"
                         value={username}/>
@@ -73,22 +74,26 @@ const Auth = ()=>{
                         type="password"
                         value={password}
                     />
+                    
+                
                 </div>
                 <button onClick={variant==='login'?login:register} className="bg-blue-600 py-3 text-white font-medium rounded-md  mt-5
                         hover:bg-blue-800 transition w-[20%]">
                             {variant==='login'?'Login':'Sign Up'}
                 </button>
                 <p className="text-center">
-                            {variant==='login'?'New to Global Link?':'Already have an account?'}
+                            {variant==='login'?'New to Course Bridge?':'Already have an account?'}
                             <span onClick={toggleVariant} className="underline ml-1 hover:text-blue-600 cursor-pointer">
                                 {variant==='login'?'Create Account':'Login'}
                             </span>
                 </p>
                  <div className="flex flex-col items-center gap-4 mt-8 justify-center">
-                            <div onClick={(e)=>{
+                            <div 
+                            onClick={(e)=>{
                                 e.preventDefault();
                                 signIn('google',{callbackUrl:'/'});
-                                }} className="md:px-12 xs:bg-blue-400 border-[1px] rounded-[40px]
+                                }}
+                                 className="md:px-12 xs:bg-blue-400 border-[1px] rounded-[40px]
                                 border-[#333333] w-auto h-10 flex items-center px-3 py-6 
                                  justify-center cursor-pointer hover:opacity-80 transition">
                                 <FcGoogle size={30}/>
