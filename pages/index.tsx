@@ -9,33 +9,42 @@ import { NextPageContext } from "next";
 import { useEffect, useState } from "react";
 import useSubjects from "@/hooks/useSubjects";
 import Link from 'next/link';
+import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 
-export async function getServerSideProps(context: NextPageContext){
-  const session = await getSession(context);
+// export async function getServerSideProps(context: NextPageContext){
+//   const session = await getSession(context);
 
-  if(!session){
-    return {
-      redirect:{
-        destination:'/auth',
-        permanent:false,
-      }
-    }
-  }
+//   if(!session){
+//     return {
+//       redirect:{
+//         destination:'/auth',
+//         permanent:false,
+//       }
+//     }
+//   }
 
-  return {
-    props:{}
-  }
-}
+//   return {
+//     props:{}
+//   }
+// }
 
 export default function Home() {
   const {data:currentUser} = useCurrentUser();
-
+  const router = useRouter();
   // Right now we do not give it user id so it shows all subjects
   const {data:subjects} = useSubjects();
 
   useEffect(()=>{
     console.log(subjects);
   },[currentUser,subjects]);
+
+  useEffect(() => {
+    if (!currentUser) {
+      
+      router.push('/auth');
+    }
+  }, [currentUser]);
   
   return (
     <div className="w-screen h-screen flex">   

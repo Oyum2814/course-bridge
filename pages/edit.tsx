@@ -7,22 +7,22 @@ import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export async function getServerSideProps(context: NextPageContext){
-    const session = await getSession(context);
+// export async function getServerSideProps(context: NextPageContext){
+//     const session = await getSession(context);
   
-    if(!session){
-      return {
-        redirect:{
-          destination:'/auth',
-          permanent:false,
-        }
-      }
-    }
+//     if(!session){
+//       return {
+//         redirect:{
+//           destination:'/auth',
+//           permanent:false,
+//         }
+//       }
+//     }
   
-    return {
-      props:{}
-    }
-  }
+//     return {
+//       props:{}
+//     }
+//   }
   
 const edit = () => {
     const {data:currentUser,mutate} = useCurrentUser();
@@ -53,6 +53,10 @@ const edit = () => {
         });
       }
 
+      if(!currentUser)
+      {
+        return null;
+      }
     return ( 
         <div className="w-screen h-screen flex">   
             <div className="w-[30%] md:w-[20%]">

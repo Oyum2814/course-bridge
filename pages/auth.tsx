@@ -1,25 +1,27 @@
-import {useState, useCallback} from "react";
+import {useState, useCallback, useEffect} from "react";
 import axios from 'axios';
-import {signIn} from 'next-auth/react';
+import {getSession, signIn} from 'next-auth/react';
 import clsx from 'clsx';
 import style from '@/public/font.module.scss';
 
 import Image from 'next/image'
 import Input from "@/components/Input";
 import { FcGoogle } from "react-icons/fc";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import router, { useRouter } from "next/router";
 const Auth = ()=>{
 
     const [email, setEmail] = useState('');
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-
     const [selectedRole, setselectedRole] = useState(""); 
+    const {data:currentUser} = useCurrentUser();
     const handleRadioChange = ( 
         value :any
     ) => { 
         setselectedRole(value); 
     }; 
-
+    const router = useRouter();
     const [variant, setVariant] = useState('login');
 
     const toggleVariant = useCallback(()=>{
@@ -44,6 +46,19 @@ const Auth = ()=>{
         }
     },[email, username, password,login,selectedRole]);
 
+    useEffect(() => {
+        
+        // Check if user is already authenticated
+        const checkAuth =  () => {
+        
+          if (currentUser) {
+            // If user is authenticated, redirect to home page
+           
+            router.replace("/");
+          }
+        };    
+        checkAuth();
+    }, []);   
     
     
     return(

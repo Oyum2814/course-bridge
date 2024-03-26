@@ -14,22 +14,22 @@ import { IoArrowBackSharp } from "react-icons/io5";
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 
-export async function getServerSideProps(context: NextPageContext){
-    const session = await getSession(context);
+// export async function getServerSideProps(context: NextPageContext){
+//     const session = await getSession(context);
   
-    if(!session){
-      return {
-        redirect:{
-          destination:'/auth',
-          permanent:false,
-        }
-      }
-    }
+//     if(!session){
+//       return {
+//         redirect:{
+//           destination:'/auth',
+//           permanent:false,
+//         }
+//       }
+//     }
   
-    return {
-      props:{}
-    }
-  }
+//     return {
+//       props:{}
+//     }
+//   }
   
 const SubjectId = () => {
     const router = useRouter();
@@ -41,6 +41,11 @@ const SubjectId = () => {
         router.back();
     },[router]);
 
+    if(!currentUser)
+      {
+        return null;
+      }
+      
     return (  
         <div className={clsx(style.wrapper,"w-screen h-screen flex")}>   
            

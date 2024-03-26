@@ -7,27 +7,31 @@ import style from "@/public/font.module.scss";
 import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
 
-export async function getServerSideProps(context: NextPageContext){
-    const session = await getSession(context);
+// export async function getServerSideProps(context: NextPageContext){
+//     const session = await getSession(context);
   
-    if(!session){
-      return {
-        redirect:{
-          destination:'/auth',
-          permanent:false,
-        }
-      }
-    }
+//     if(!session){
+//       return {
+//         redirect:{
+//           destination:'/auth',
+//           permanent:false,
+//         }
+//       }
+//     }
   
-    return {
-      props:{}
-    }
-}
+//     return {
+//       props:{}
+//     }
+// }
 
 const documents = () => {
     const {data:currentUser} = useCurrentUser();
     const {data:subjects} = useSubjects();
 
+    if(!currentUser)
+      {
+        return null;
+      }
     return ( 
         <div className="w-screen h-screen flex">   
             <div className="w-[30%] md:w-[20%]">
