@@ -39,12 +39,12 @@ export default function Home() {
     console.log(subjects);
   },[currentUser,subjects]);
 
-  useEffect(() => {
-    if (!currentUser) {
+  // useEffect(() => {
+  //   if (!currentUser) {
       
-      router.push('/auth');
-    }
-  }, [currentUser]);
+  //     router.push('/auth');
+  //   }
+  // }, [currentUser]);
   
   return (
     <div className="w-screen h-screen flex">   
